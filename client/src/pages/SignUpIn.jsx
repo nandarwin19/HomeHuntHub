@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { FaCircleNotch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/slices/userSlice";
 
 export default function SignUp() {
+  const { loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const [toggleChange, setToggleChange] = useState(false);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const toggleForm = () => {
@@ -19,8 +25,10 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // dispatch(signInStart(formData));
+
     try {
+      dispatch(signInStart(true));
       const url = toggleChange ? "/api/auth/signin" : "/api/auth/signup";
       const res = await fetch(url, {
         method: "POST",
@@ -31,18 +39,22 @@ export default function SignUp() {
       });
       const data = await res.json();
       if (data.success === false) {
-        setError(data.message);
-        setLoading(false);
+        // setError(data.message);
+        // setLoading(false);
+
+        // let's redux tookit
+        dispatch(signInFailure(data.message));
+
         return;
       }
-      setLoading(false);
-      setError(null);
+      // setLoading(false);
+      // setError(null);
+      dispatch(signInSuccess(data));
       console.log(data);
       navigate("/");
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
-      console.log(error);
+      // setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 
