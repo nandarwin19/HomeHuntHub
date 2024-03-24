@@ -64,7 +64,7 @@ export default function Header() {
         </div>
 
         {isSwitchOn && (
-          <div className="absolute md:hidden flex w-1/2 text-center justify-center top-[90%] right-0 bg-slate-300 py-10 px-8 rounded-md">
+          <div className="absolute md:hidden z-50 flex w-1/2 text-center justify-center top-[90%] right-0 bg-slate-300 py-10 px-8 rounded-md">
             <ul className=" flex flex-col gap-4">
               <Link to="/">
                 <li className="sm:inline text-slate-700 hover:underline">
