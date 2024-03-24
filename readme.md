@@ -16,3 +16,7 @@ You can install bcryptjs
 npm install bcryptjs
 
 ```
+
+## create .env in client
+
+VITE_FIREBASE_API_KEY = YOUR_API_KEY

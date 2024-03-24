@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String,
+      default: "https://i.imgur.com/6VBx3io.png",
+    },
   },
   { timestamps: true }
 ); //timestamps: true adds createdAt and updatedAt fields

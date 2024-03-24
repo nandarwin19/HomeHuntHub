@@ -7,6 +7,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/slices/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const { loading, error } = useSelector((state) => state.user);
@@ -107,6 +108,7 @@ export default function SignUp() {
           {error && (
             <p className="text-red-500 text-sm mt-5 text-center">{error}</p>
           )}
+          <OAuth />
           <p className="text-gray-600 text-sm mt-5">
             {toggleChange
               ? "Don't have an account? "
