@@ -3,8 +3,10 @@ import { FaSearch } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   const [isSwitchOn, setSwitch] = useState(false);
 
   const toggleMenu = () => {
@@ -27,7 +29,7 @@ export default function Header() {
           />
           <FaSearch className="text-slate-600" />
         </form>
-        <ul className="hidden md:flex gap-4">
+        <ul className="hidden md:flex items-center justify-center gap-4">
           <Link to="/">
             <li className="hidden sm:inline text-slate-700 hover:underline">
               HOME
@@ -38,8 +40,18 @@ export default function Header() {
               ABOUT
             </li>
           </Link>
-          <Link to="/sign-up-in">
-            <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+          <Link to="/sign-in">
+            {currentUser ? (
+              <Link to="/profile">
+                <img
+                  src={currentUser.avatar}
+                  alt="profile"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+              </Link>
+            ) : (
+              <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+            )}
           </Link>
         </ul>
 
@@ -65,7 +77,11 @@ export default function Header() {
                 </li>
               </Link>
               <Link to="/sign-in">
-                <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+                {currentUser ? (
+                  <li className=" text-slate-700 hover:underline"> Logout</li>
+                ) : (
+                  <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+                )}
               </Link>
             </ul>
           </div>
