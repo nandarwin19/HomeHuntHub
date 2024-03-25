@@ -40,7 +40,7 @@ export default function Header() {
               ABOUT
             </li>
           </Link>
-          <Link to="/sign-in">
+          <Link to="/sign-up-in">
             {currentUser ? (
               <Link to="/profile">
                 <img
@@ -76,7 +76,7 @@ export default function Header() {
                   ABOUT
                 </li>
               </Link>
-              <Link to="/sign-in">
+              <Link to="/sign-up-in">
                 {currentUser ? (
                   <li className=" text-slate-700 hover:underline"> Logout</li>
                 ) : (

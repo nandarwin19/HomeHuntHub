@@ -8,14 +8,25 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import {
+  updateUserStart,
+  updateUserFailure,
+  updateUserSuccess,
+} from "../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Profile() {
-  const { loading, currentUser } = useSelector((state) => state.user);
+  const { loading, currentUser, error } = useSelector((state) => state.user);
   const fileRef = useRef(null);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+
+  const dispatch = useDispatch();
+
+  console.log(formData);
 
   // firebase storage
   // allow read;
@@ -54,12 +65,40 @@ export default function Profile() {
     );
   };
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
+  };
+
   return (
     <div className="h-[90vh] w-full flex items-center justify-center bg-slate-100  font-poppins">
       <div className="w-11/12 mx-auto pt-10">
         <div className="w-full max-w-sm mx-auto  backdrop-blur-md rounded-lg p-8">
           <h1 className="text-3xl mb-5 text-center font-bold">Profile</h1>
-          <form className="flex flex-col gap-5 mt-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-8">
             <input
               type="file"
               hidden
@@ -98,6 +137,8 @@ export default function Profile() {
               placeholder="Enter your username"
               className="input-field"
               name="username"
+              defaultValue={currentUser.username}
+              onChange={handleChange}
             />
 
             <input
@@ -105,12 +146,15 @@ export default function Profile() {
               type="email"
               placeholder="Enter your email"
               className="input-field"
+              defaultValue={currentUser.email}
+              onChange={handleChange}
             />
             <input
               type="password"
               name="password"
               placeholder="Enter your password"
               className="input-field"
+              onChange={handleChange}
             />
 
             <button
@@ -130,6 +174,10 @@ export default function Profile() {
               <span>Create account</span>
               <span>Sign out</span>
             </div>
+            <p className="text-red-600 text-sm">{error ? error : null}</p>
+            <p className="text-green-600">
+              {updateSuccess ? "User is successfully updated!" : ""}
+            </p>
           </form>
         </div>
       </div>
