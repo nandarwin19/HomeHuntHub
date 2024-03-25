@@ -114,6 +114,20 @@ export default function Profile() {
     }
   };
 
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/auth/signout"); // we don't need to mention get request bcz get is default
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   return (
     <div className="h-[90vh] w-full flex items-center justify-center bg-slate-100  font-poppins">
       <div className="w-11/12 mx-auto pt-10">
@@ -193,7 +207,7 @@ export default function Profile() {
             </button>
             <div className="flex items-center cursor-pointer justify-between text-sm text-red-600">
               <span onClick={handleDeleteUser}>Delete account</span>
-              <span>Sign out</span>
+              <span onClick={handleSignout}>Sign out</span>
             </div>
             <p className="text-red-600 text-sm">{error ? error : null}</p>
             <p className="text-green-600">
