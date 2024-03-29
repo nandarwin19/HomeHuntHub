@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { FaCircleNotch } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { CiEdit } from "react-icons/ci";
 import {
   getDownloadURL,
   getStorage,
@@ -16,6 +17,9 @@ import {
   deleteUserSuccess,
 } from "../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { MdDelete } from "react-icons/md";
 
 export default function Profile() {
   const { loading, currentUser, error } = useSelector((state) => state.user);
@@ -25,6 +29,8 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
+  const [userListings, setUserListings] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -128,6 +134,42 @@ export default function Profile() {
     }
   };
 
+  const handleShowListings = async () => {
+    try {
+      setShowListingsError(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        setShowListingsError(true);
+        return;
+      }
+      setUserListings(data);
+    } catch (error) {
+      setShowListingsError(true);
+    }
+  };
+
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="h-[90vh] w-full flex items-center justify-center bg-slate-100  font-poppins">
       <div className="w-11/12 mx-auto pt-10">
@@ -159,7 +201,7 @@ export default function Profile() {
                   ) : (
                     filePerc === 100 && (
                       <span className="text-green-700">
-                        Successfully ploaded
+                        Successfully uploaded
                       </span>
                     )
                   )
@@ -194,7 +236,7 @@ export default function Profile() {
 
             <button
               disabled={loading}
-              className="w-full cursor-pointer flex items-center justify-center gap-2 mt-5 py-2 relative text-white bg-black/90 font-medium rounded-lg"
+              className="w-full cursor-pointer flex items-center justify-center  py-2 relative text-white bg-black/90 font-medium rounded-lg"
             >
               Update
               {loading && (
@@ -205,15 +247,74 @@ export default function Profile() {
                 </div>
               )}
             </button>
-            <div className="flex items-center cursor-pointer justify-between text-sm text-red-600">
-              <span onClick={handleDeleteUser}>Delete account</span>
-              <span onClick={handleSignout}>Sign out</span>
-            </div>
-            <p className="text-red-600 text-sm">{error ? error : null}</p>
-            <p className="text-green-600">
-              {updateSuccess ? "User is successfully updated!" : ""}
-            </p>
+            <Link
+              to={"/create-listing"}
+              className="w-full cursor-pointer flex items-center justify-center mb-2 py-2 relative text-white bg-green-700 font-medium rounded-lg"
+            >
+              Create Listing
+            </Link>
           </form>
+          <div className="flex items-center cursor-pointer justify-between text-sm text-red-600">
+            <span onClick={handleDeleteUser}>Delete account</span>
+            <span onClick={handleSignout}>Sign out</span>
+          </div>
+          <p className="text-red-600 text-sm">{error ? error : null}</p>
+          <p className="text-green-600">
+            {updateSuccess ? "User is successfully updated!" : ""}
+          </p>
+          <button
+            onClick={handleShowListings}
+            className="text-green-700 w-full"
+          >
+            Show listings
+          </button>
+          <p className="text-red-700 text-sm">
+            {showListingsError ? "Error showing listings" : null}
+          </p>
+
+          {userListings && userListings.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <h1 className="text-center mt-7 text-2xl font-semibold">
+                Your Listings
+              </h1>
+              {userListings.map((listing) => (
+                <div
+                  key={listing._id}
+                  className="border rounded-lg p-3 flex justify-between items-center gap-4"
+                >
+                  <Link to={`/listing/${listing._id}`}>
+                    <img
+                      src={listing.imageUrls[0]}
+                      alt="listing cover"
+                      className="h-16 w-16 object-contain"
+                    />
+                  </Link>
+                  <Link
+                    className="text-slate-700 font-semibold  hover:underline truncate flex-1"
+                    to={`/listing/${listing._id}`}
+                  >
+                    <p>{listing.name}</p>
+                  </Link>
+
+                  <div className="flex gap-4">
+                    <button
+                      className="p-2 border border-black/80 rounded-sm"
+                      aria-label="Edit"
+                    >
+                      <CiEdit />
+                    </button>
+                    <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className="p-2 border border-black/80 rounded-sm"
+                      aria-label="Delete"
+                    >
+                      <MdDelete />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
