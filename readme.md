@@ -1,7 +1,7 @@
 ## Create .env file
 
 ```
-MONGO = YOUR_MONGO_URL
+MONGO = YOUR_MONGO_KEY
 ```
 
 # Storing Passwords Securely with bcryptjs in MongooseDB
