@@ -297,12 +297,14 @@ export default function Profile() {
                   </Link>
 
                   <div className="flex gap-4">
-                    <button
-                      className="p-2 border border-black/80 rounded-sm"
-                      aria-label="Edit"
-                    >
-                      <CiEdit />
-                    </button>
+                    <Link to={`/update-listing/${listing._id}`}>
+                      <button
+                        className="p-2 border border-black/80 rounded-sm"
+                        aria-label="Edit"
+                      >
+                        <CiEdit />
+                      </button>
+                    </Link>
                     <button
                       onClick={() => handleListingDelete(listing._id)}
                       className="p-2 border border-black/80 rounded-sm"

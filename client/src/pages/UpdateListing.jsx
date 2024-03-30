@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getStorage,
   ref,
@@ -8,9 +8,10 @@ import {
 import { app } from "../firebase";
 import { FaCircleNotch } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function CreateListing() {
+export default function UpdateListing() {
+  const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -34,6 +35,22 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
 
   console.log(formData);
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      const listingId = params.listingID;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setFormData(data);
+      console.log(data);
+    };
+    fetchListing();
+  }, []);
+
   const handleImageSubmit = () => {
     setUploading(true);
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -133,7 +150,7 @@ export default function CreateListing() {
 
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`/api/listing/update/${params.listingID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,7 +166,7 @@ export default function CreateListing() {
         setError(data.message);
       }
       // console.log(data);
-      navigate(`/listing/${data._id}`);
+      navigate(`/profile`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -159,7 +176,7 @@ export default function CreateListing() {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
-        Create a Listing
+        Update a Listing
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
@@ -284,9 +301,7 @@ export default function CreateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular price</p>
-                {formData.type === "rent" && (
-                  <span className="text-xs">($ / month)</span>
-                )}
+                <span className="text-xs">($ / month)</span>
               </div>
             </div>
             {formData.offer && (
@@ -303,9 +318,7 @@ export default function CreateListing() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted price</p>
-                  {formData.type === "rent" && (
-                    <span className="text-xs">($ / month)</span>
-                  )}
+                  <span className="text-xs">($ / month)</span>
                 </div>
               </div>
             )}
@@ -370,7 +383,7 @@ export default function CreateListing() {
             disabled={loading || uploading}
             className="p-3 flex items-center justify-center bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
           >
-            Create Listing
+            Update Listing
             {loading && (
               <div className="w-4 h-4">
                 <div className="animate-spin">
