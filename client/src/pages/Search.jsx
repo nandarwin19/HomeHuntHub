@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { FaCircleNotch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 
 export default function Search() {
   const [loading, setLoading] = useState(false);
@@ -209,6 +211,27 @@ export default function Search() {
         <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
           Listing results:
         </h1>
+        <div className="p-7 flex flex-wrap justify-between gap-4">
+          {!loading && listings.length === 0 && (
+            <h1 className="text-2xl font-semibold text-slate-700 p-3">
+              No listings found
+            </h1>
+          )}
+          {loading && (
+            <div className="flex w-full mt-44 mx-auto items-center justify-center">
+              <div className="w-4 h-4 mx-auto">
+                <div className="animate-spin">
+                  <FaCircleNotch />
+                </div>
+              </div>
+            </div>
+          )}
+          {!loading &&
+            listings &&
+            listings.map((listing) => (
+              <ListingItem key={listing._id} listing={listing} />
+            ))}
+        </div>
       </div>
     </div>
   );
