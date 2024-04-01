@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
 import { FaGithub, FaTelegramPlane } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import emailjs from "@emailjs/browser";
+
+import ContactHome from "../components/ContactHome";
 
 function Home() {
-  const form = useRef();
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
@@ -233,26 +233,6 @@ function Home() {
     };
   }, []);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_k0p3e2l",
-        "template_1s0krxy",
-        form.current,
-        "RJ2X-UwCaPI5xkeS2"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  };
-
   return (
     <div className="wrapp">
       <header className="header  gsap__anim">
@@ -263,10 +243,10 @@ function Home() {
           </div>
           <div className="content title title-p">
             <p className="text-2xl text-[#fff] ">Welcome to our website</p>
-            <h1 className="">
+            <h1 className="text-[80px] tablet:text-[90px]">
               WE ARE THE BEST<span className="stroke"> Home </span> SHOP
             </h1>
-            <button className="text-white p-3 my-8 text-xl bg-[#eb0945]">
+            <button className="hidden tablet:flex text-white p-3 my-8 text-xl bg-[#eb0945]">
               {`Let's explore`}
             </button>
           </div>
@@ -320,18 +300,20 @@ function Home() {
               {offerListings && offerListings.length > 0 && (
                 <div className="mt-[5%] text-white listings__list1">
                   <div className="flex justify-between gap-2 mb-6">
-                    <h1 className="text-3xl font-semibold">Recent offers</h1>
+                    <h1 className="text-2xl md:text-3xl font-semibold">
+                      Recent offers
+                    </h1>
                     <Link
                       to={`/search?offer=true`}
                       className="text-gray-300 underline"
                     >
-                      <button className="uppercase px-4 bg-white text-primary font-semibold  py-2">
+                      <button className="uppercase text-sm border px-2 md:px-4 text-white font-semibold  py-2">
                         Show more
                       </button>
                     </Link>
                   </div>
 
-                  <div className="flex listings__list  gap-2 justify-between">
+                  <div className="flex flex-wrap listings__list mt-[20px] gap-4 justify-between">
                     {offerListings.map((listing) => (
                       <ListingItem listing={listing} key={listing._id} />
                     ))}
@@ -348,18 +330,20 @@ function Home() {
               {saleListings && saleListings.length > 0 && (
                 <div className="mt-[5%] text-white listings__list2">
                   <div className="flex justify-between gap-2 mb-6">
-                    <h1 className="text-3xl font-semibold">Recent sales</h1>
+                    <h1 className="text-2xl md:text-3xl font-semibold">
+                      Recent sales
+                    </h1>
                     <Link
                       to={`/search?type=sale`}
                       className="text-gray-300 underline"
                     >
-                      <button className="uppercase px-4 bg-white text-primary font-semibold  py-2">
+                      <button className="text-sm uppercase border px-2 md:px-4 text-white font-semibold  py-2">
                         Show more
                       </button>
                     </Link>
                   </div>
 
-                  <div className="flex listings__list  gap-2 justify-between">
+                  <div className="flex flex-wrap listings__list mt-[20px] gap-4 justify-between">
                     {saleListings.map((listing) => (
                       <ListingItem listing={listing} key={listing._id} />
                     ))}
@@ -376,18 +360,20 @@ function Home() {
               {rentListings && rentListings.length > 0 && (
                 <div className="mt-[5%] text-white listings__list3">
                   <div className="flex justify-between gap-2 mb-6">
-                    <h1 className="text-3xl font-semibold">Recent rents</h1>
+                    <h1 className="text-2xl md:text-3xl font-semibold">
+                      Recent rents
+                    </h1>
                     <Link
                       to={`/search?type=rent`}
                       className="text-gray-300 underline"
                     >
-                      <button className="uppercase px-4 bg-white text-primary font-semibold  py-2">
+                      <button className="text-sm uppercase border px-2 md:px-4 text-white font-semibold  py-2">
                         Show more
                       </button>
                     </Link>
                   </div>
 
-                  <div className="flex listings__list  gap-2 justify-between">
+                  <div className="flex flex-wrap listings__list mt-[20px] gap-4 justify-between">
                     {rentListings.map((listing) => (
                       <ListingItem listing={listing} key={listing._id} />
                     ))}
@@ -415,68 +401,11 @@ function Home() {
 
         <section className="header gsap__anim bg-white">
           <div className="parallax__wrapp text-white">
-            <div className="flex justify-between gap-20 max-container">
-              <div className="w-4/5">
-                <h1 className="text-3xl uppercase text-center">Contact</h1>
-
-                <p className="text-xl uppercase my-6">Send us a message</p>
-                {/* <form className="">
-                  <div className="flex flex-col gap-12">
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="name">Name*</label>
-                      <input className="border-b border-white/70 outline-none bg-transparent" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="email">Email*</label>
-                      <input className="border-b border-white/70 outline-none bg-transparent" />
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="message">Message</label>
-                      <textarea
-                        className="bg-transparent border border-white/70 p-2 placeholder:text-sm"
-                        placeholder="Type message here..."
-                        rows={5}
-                      />
-                    </div>
-
-                    <button className="flex rounded-md items-start p-2 text-center justify-center font-bold py-2 text-black bg-white w-24">
-                      Send
-                    </button>
-                  </div>
-                </form> */}
-                <form
-                  ref={form}
-                  onSubmit={sendEmail}
-                  className="flex flex-col gap-6"
-                >
-                  <label>Name*</label>
-                  <input
-                    type="text"
-                    name="user_name"
-                    className="border-b border-white/70 outline-none bg-transparent"
-                  />
-                  <label>Email*</label>
-                  <input
-                    type="email"
-                    name="user_email"
-                    className="border-b border-white/70 outline-none bg-transparent"
-                  />
-                  <label>Message</label>
-                  <textarea
-                    className="bg-transparent border border-white/70 p-2 placeholder:text-sm"
-                    placeholder="Type message here..."
-                    rows={5}
-                    name="message"
-                  />
-                  <input
-                    className="flex rounded-md items-start p-2 text-center justify-center font-bold py-2 text-white bg-[#eb0945] w-24"
-                    type="submit"
-                    value="Send"
-                  />
-                </form>
+            <div className="flex flex-col md:flex-row justify-between gap-20 max-container">
+              <div className="w-full md:w-4/5">
+                <ContactHome />
               </div>
-              <div className="w-2/5 space-y-4">
+              <div className="w-2/5 hidden md:block space-y-4">
                 <div>
                   <h1 className="text-lg uppercase">Our address</h1>
                   <p className="mt-4">
@@ -517,9 +446,19 @@ function Home() {
                 </div>
               </div>
             </div>
-            <p className="text-center text-gray-600 font-semibold">
-              Created by <span className="text-[#acabab] font-bold">nwin</span>
-            </p>
+            <div className="flex items-center justify-center mt-4">
+              <p className="text-center flex text-sm text-gray-600 font-semibold">
+                Created by&nbsp;
+                <span className="text-[#acabab] hover:underline font-bold">
+                  <a
+                    href="https://github.com/nandarwin19"
+                    className="flex items-center space-x-2"
+                  >
+                    nwin
+                  </a>
+                </span>
+              </p>
+            </div>
           </div>
         </section>
       </main>

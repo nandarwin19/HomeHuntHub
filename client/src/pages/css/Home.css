@@ -1,3 +1,8 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 /* general *******************************************/
 /****************************************************/
 :root {
@@ -9,280 +14,109 @@
   --indent: 50px;
   --indent2: 100px;
 }
-
-/* * {
-  box-sizing: border-box;
-  font-family: "Syne", sans-serif;
-  font-weight: 800;
-  margin: 0;
-  padding: 0;
-  font-feature-settings: "pnum" on, "lnum" on;
-}
-
-body {
-  background: var(--second-color);
-} */
-
 .wrapp {
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
+  @apply relative w-full h-auto overflow-hidden;
 }
 
+.listing__section {
+  @apply h-full w-full;
+}
 .main {
-  position: relative;
-  z-index: 2;
+  @apply relative z-[2];
 }
-
 .content {
-  width: 100%;
-  height: auto;
-  padding: 0 var(--indent);
+  @apply w-full h-auto pr-[var(--indent)] pl-[var(--indent)] py-0;
 }
-
 .parallax__wrapp {
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
+  @apply w-full h-full bg-black;
 }
-
-/* infinite scroll ************************/
-/*****************************************/
 .header {
-  height: 100vh;
-  overflow: hidden;
+  @apply h-screen overflow-hidden;
 }
-
 .header .parallax__wrapp {
-  position: relative;
-  padding: var(--indent2) 0;
+  @apply relative pt-[var(--indent2)] pb-[var(--indent2)] px-0;
 }
-
 .header__bg {
-  position: absolute;
-  width: 30%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  margin-right: 100px;
-  opacity: 1;
+  @apply absolute w-full tablet:w-[50%] laptop:w-[30%] h-full opacity-100 tablet:mr-[100px] right-0 top-0;
 }
-
 .header__bg img {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 80%;
-  object-fit: cover;
+  @apply block relative w-full h-[100vh] tablet:h-4/5 object-cover first:z-[2] sm:first:mt-[10%] tablet:first:rounded-t-[10%] last:absolute last:blur-[50px] last:-translate-x-1/4 last:rotate-[5deg] last:scale-150 last:left-0 last:top-0;
 }
-
-.header__bg img:first-child {
-  margin-top: 10%;
-  z-index: 2;
-  border-top-right-radius: 10%;
-  border-top-left-radius: 10%;
-}
-
-.header__bg img:last-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  filter: blur(50px);
-  transform: scale(1.5) translateX(-25%) rotate(5deg);
-}
-
 .title {
-  position: relative;
-  margin: 0;
-  font-size: var(--fz-big);
-  line-height: 1;
-  color: var(--pr-color);
-  text-transform: uppercase;
-  mix-blend-mode: difference;
-  z-index: 2;
+  @apply relative text-[50px] md:text-[70px] lg:text-[length:var(--fz-big)] leading-none text-[color:var(--pr-color)] uppercase mix-blend-difference z-[2] m-0;
 }
-
 .title__wrapp {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @apply flex justify-between items-center;
 }
-
 .title .stroke {
-  display: block;
-  color: transparent;
+  @apply block text-transparent;
   -webkit-text-stroke: 1px var(--color-n3);
 }
-
 .title__img {
-  display: block;
-  width: 200px;
-  height: 200px;
-  opacity: 0.7;
-  transform: rotate(10deg);
+  @apply block w-[120px] h-[120px] md:w-[200px] md:h-[200px] opacity-70 rotate-[10deg];
 }
-
 .title__img img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  color: white !important;
+  @apply block w-full h-full text-[white];
 }
-
 .title__t {
-  display: inline-block;
-  transform: translateX(-105px);
+  @apply inline-block translate-x-[-45px] tablet:translate-x-[-105px];
 }
-
 .section {
-  height: 100vh;
+  @apply h-screen;
 }
-
 .section .parallax__wrapp {
-  padding: 50px 0;
+  @apply px-0 py-[50px];
 }
-
 .gsap__anim {
+  @apply will-change-transform overflow-hidden;
   background: #e8e8e8;
-  will-change: transform;
-  overflow: hidden;
 }
-
 .serv .parallax__wrapp {
-  padding: 120px 0;
+  @apply px-0 py-[120px];
 }
-
 .serv__wrapp {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
-
 .serv__list {
-  position: relative;
-  margin-top: auto;
-  z-index: 2;
+  @apply relative z-[2] mt-10 md:mt-auto;
 }
-
 .serv .content,
 .serv .serv__wrapp {
-  height: 100%;
+  @apply h-full;
 }
-
-/* /////////////////////////////////////////////////  */
-
 .serv__item {
-  position: relative;
-  padding: 30px 0;
-  padding-left: 30px;
+  @apply relative text-white text-[25px] md:text-[40px] uppercase border border-[color:var(--color-n3)] cursor-pointer pl-[30px] px-0 py-[30px] border-solid hover:text-[color:var(--pr-color)] hover:z-[2];
   list-style: none;
-  color: #fff;
-  font-size: 40px;
-  text-transform: uppercase;
-  border: 1px solid var(--color-n3);
-  cursor: pointer;
 }
-
 .serv__item-img {
-  position: absolute;
-  display: block;
-  width: 350px;
-  height: 400px;
-  top: 50%;
-  right: 15%;
-  pointer-events: none;
+  @apply absolute block w-[200px] h-[200px] lg:w-[350px] lg:h-[400px] pointer-events-none -translate-y-2/4 transition-[0.4s] right-[15%] top-2/4;
   clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
-  transform: translateY(-50%);
-  transition: 0.4s;
 }
-
 .serv__item-img img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  @apply block w-full h-full object-cover;
 }
-
 .serv__item:hover {
   background: var(--color-n3);
-  color: var(--pr-color);
-  z-index: 2;
 }
-
 .serv__item:hover .serv__item-img {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
-
-.portfolio .content,
-.portfolio__wrapp,
-.portfolio__list {
-  height: 100%;
-}
-
-.portfolio__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  list-style: none;
-}
-
-.portfolio__item {
-  width: calc(50% - 25px);
-  height: calc(50% - 25px);
-}
-
-.portfolio__item-img {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.portfolio__item-img img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .approve .content,
 .approve__wrapp {
-  height: 100%;
+  @apply h-full;
 }
-
 .approve__wrapp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply flex justify-center items-center;
 }
-
 .approve__txt {
-  position: relative;
-  display: block;
-  font-size: var(--fz-big);
-  line-height: 1;
-  color: var(--pr-color);
-  text-transform: uppercase;
+  @apply relative flex flex-col items-center justify-center text-[60px] md:text-[length:var(--fz-big)] leading-none text-[color:var(--pr-color)] uppercase;
 }
-
 .approve__ix {
-  position: relative;
-  z-index: 2;
+  @apply relative z-[2] text-center;
 }
-
 .approve__star {
-  position: absolute;
-  display: block;
-  width: 500px;
-  height: 500px;
-  opacity: 0.1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  @apply absolute w-[250px] h-[250px] md:w-[500px] md:h-[500px] opacity-10 -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4;
 }
-
 .approve__star img {
-  display: block;
-  width: 100%;
-  height: 100%;
+  @apply block w-full h-full;
 }
