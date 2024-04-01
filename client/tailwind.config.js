@@ -5,7 +5,10 @@ export default {
     extend: {
       colors: {
         primary: "#000",
+        black1: "#070606",
         card: "#212121",
+        pink: "#eb0945",
+        pink1: "#e0104b",
       },
       screens: {
         phone: "414px",

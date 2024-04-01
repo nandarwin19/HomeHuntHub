@@ -50,13 +50,17 @@ body {
 }
 
 .item-card {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 @layer utilities {
   .max-container {
     @apply mx-auto w-[90%] lg:max-w-[1400px];
   }
+}
+
+.shadow-white {
+  @apply shadow-[0_10px_15px_-3px_rgba(255,255,255,0.1),0_4px_6px_-2px_rgba(255,255,255,0.05)];
 }
 
 /* Sign in Sign up  */

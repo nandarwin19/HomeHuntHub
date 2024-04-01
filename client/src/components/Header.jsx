@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
@@ -11,6 +11,7 @@ export default function Header() {
   const [isSwitchOn, setSwitch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setSwitch(!isSwitchOn);
@@ -30,15 +31,30 @@ export default function Header() {
     if (searchTermFromUrl) setSearchTerm(searchTermFromUrl);
   }, [location.search]);
 
+  let headerTextColor = "text-white";
+  let borderColor = "border-gray-600";
+  let headerColor = "bg-primary";
+  if (
+    location.pathname === "/profile" ||
+    location.pathname === "/sign-up-in" ||
+    location.pathname === "/about" ||
+    location.pathname === "/create-listing"
+  ) {
+    headerColor = "bg-slate-200";
+    headerTextColor = "text-black";
+    borderColor = "border-gray-400";
+  }
+
   return (
-    <header className="bg-primary shadow-xl text-white w-full  sticky inset-0 z-50">
+    <header
+      className={`${headerColor} shadow-md text-white w-full  sticky inset-0 z-50`}
+    >
       <div className="max-container">
         <div className="flex justify-between items-center p-3">
           <Link to="/">
-
             <div className="flex gap-2 font-extrabold ">
               <div className="flex gap-1">
-                <p className="text-xl">N</p>
+                <p className={`text-xl ${headerTextColor}`}>N</p>
 
                 <motion.div
                   animate={{
@@ -57,27 +73,32 @@ export default function Header() {
           </Link>
           <form
             onSubmit={handleSubmit}
-            className="border border-gray-600 hover:scale-100 hover:shadow-sm transition duration-300 ease-out p-3 rounded-md flex items-center"
+            className={`border ${borderColor} lg:ml-40 hover:scale-100 hover:shadow-sm transition duration-300 ease-out p-3 rounded-md flex items-center`}
           >
             <input
               type="text"
               placeholder="Search..."
-              className="bg-transparent focus:outline-none w-24 sm:w-64"
+              className={`${headerTextColor} bg-transparent focus:outline-none w-24 sm:w-72`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button>
-              <FaSearch className="text-slate-600" />
+              <FaSearch className="text-gray-400" />
             </button>
           </form>
+
           <ul className="hidden md:flex items-center justify-center gap-8">
             <Link to="/">
-              <li className="hidden sm:inline  hover:text-white font-semibold">
+              <li
+                className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
+              >
                 Home
               </li>
             </Link>
             <Link to="/about">
-              <li className="hidden sm:inline  hover:text-white font-semibold">
+              <li
+                className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
+              >
                 About
               </li>
             </Link>
@@ -91,7 +112,11 @@ export default function Header() {
                   />
                 </Link>
               ) : (
-                <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+                <li
+                  className={`hidden sm:inline  hover:text-white font-semibold ${headerTextColor}`}
+                >
+                  Sign in
+                </li>
               )}
             </Link>
           </ul>
@@ -105,7 +130,7 @@ export default function Header() {
           </div>
 
           {isSwitchOn && (
-            <div className="absolute md:hidden z-50 flex w-1/2 text-center justify-center top-[90%] right-0 bg-slate-300 py-10 px-8 rounded-md">
+            <div className="absolute lg:hidden z-50 flex w-1/2 text-center justify-center top-[90%] right-0 bg-slate-300 py-10 px-8 rounded-md">
               <ul className=" flex flex-col gap-4">
                 <Link to="/">
                   <li className="sm:inline text-slate-700 hover:underline">

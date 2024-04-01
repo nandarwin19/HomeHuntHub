@@ -18,7 +18,7 @@ import {
 } from "../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
 export default function Profile() {
@@ -95,7 +95,8 @@ export default function Profile() {
       }
 
       dispatch(updateUserSuccess(data));
-      setUpdateSuccess(true);
+      // setUpdateSuccess(true);
+      toast.success("Successfully updated!");
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }
@@ -171,10 +172,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="h-[90vh] w-full flex items-center justify-center bg-slate-100  font-poppins">
-      <div className="w-11/12 mx-auto pt-10">
-        <div className="w-full max-w-sm mx-auto  backdrop-blur-md rounded-lg p-8">
-          <h1 className="text-3xl mb-5 text-center font-bold">Profile</h1>
+    <div className="h-full min-h-[100vh] bg-slate-200 w-full flex items-center justify-center  font-poppins">
+      <Toaster />
+      <div className="w-11/12  mx-auto">
+        <div className="w-full shadow-2xl mt-12 max-w-sm mx-auto  backdrop-blur-md rounded-lg p-8">
+          <h1 className="text-3xl mb-5 text-black text-center font-bold">
+            Profile
+          </h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-8">
             <input
               type="file"
@@ -192,15 +196,15 @@ export default function Profile() {
               />
               <p className="text-sm">
                 {fileUploadError ? (
-                  <span className="text-red-700">
+                  <span className="text-red-600">
                     Error Image upload(Image must be less than 3 MB)
                   </span>
                 ) : filePerc > 0 ? (
                   filePerc < 100 ? (
-                    <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
+                    <span className="text-slate-600">{`Uploading ${filePerc}%`}</span>
                   ) : (
                     filePerc === 100 && (
-                      <span className="text-green-700">
+                      <span className="text-green-600">
                         Successfully uploaded
                       </span>
                     )
@@ -236,7 +240,7 @@ export default function Profile() {
 
             <button
               disabled={loading}
-              className="w-full cursor-pointer flex items-center justify-center  py-2 relative text-white bg-black/90 font-medium rounded-lg"
+              className="w-full cursor-pointer flex items-center justify-center  py-2 relative text-white bg-black1 font-medium rounded-lg"
             >
               Update
               {loading && (
@@ -249,7 +253,7 @@ export default function Profile() {
             </button>
             <Link
               to={"/create-listing"}
-              className="w-full cursor-pointer flex items-center justify-center mb-2 py-2 relative text-white bg-green-700 font-medium rounded-lg"
+              className="w-full cursor-pointer flex items-center justify-center mb-2 py-2 relative text-white bg-green-600 font-medium rounded-lg"
             >
               Create Listing
             </Link>
@@ -264,23 +268,24 @@ export default function Profile() {
           </p>
           <button
             onClick={handleShowListings}
-            className="text-green-700 w-full"
+            className="text-green-600 w-full"
           >
             Show listings
           </button>
           <p className="text-red-700 text-sm">
             {showListingsError ? "Error showing listings" : null}
           </p>
-
+        </div>
+        <div className="py-8">
           {userListings && userListings.length > 0 && (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col text-black1 gap-4">
               <h1 className="text-center mt-7 text-2xl font-semibold">
                 Your Listings
               </h1>
               {userListings.map((listing) => (
                 <div
                   key={listing._id}
-                  className="border rounded-lg p-3 flex justify-between items-center gap-4"
+                  className="border border-gray-300 rounded-lg p-3 flex justify-between items-center gap-4"
                 >
                   <Link to={`/listing/${listing._id}`}>
                     <img
@@ -290,7 +295,7 @@ export default function Profile() {
                     />
                   </Link>
                   <Link
-                    className="text-slate-700 font-semibold  hover:underline truncate flex-1"
+                    className="text-black/80 font-semibold  hover:underline truncate flex-1"
                     to={`/listing/${listing._id}`}
                   >
                     <p>{listing.name}</p>
@@ -299,7 +304,7 @@ export default function Profile() {
                   <div className="flex gap-4">
                     <Link to={`/update-listing/${listing._id}`}>
                       <button
-                        className="p-2 border border-black/80 rounded-sm"
+                        className="p-2 border border-gray-300 rounded-sm"
                         aria-label="Edit"
                       >
                         <CiEdit />
@@ -307,7 +312,7 @@ export default function Profile() {
                     </Link>
                     <button
                       onClick={() => handleListingDelete(listing._id)}
-                      className="p-2 border border-black/80 rounded-sm"
+                      className="p-2 border border-gray-300 rounded-sm"
                       aria-label="Delete"
                     >
                       <MdDelete />
