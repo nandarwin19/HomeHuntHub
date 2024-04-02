@@ -157,7 +157,7 @@ export default function CreateListing() {
   };
 
   return (
-    <main className="bg-slate-200 w-full h-full">
+    <main className="bg-slate-200 w-full h-full min-h-[100vh]">
       <div className="p-3  max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold text-center my-7">
           Create a Listing

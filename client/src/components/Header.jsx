@@ -37,7 +37,7 @@ export default function Header() {
   if (
     location.pathname === "/profile" ||
     location.pathname === "/sign-up-in" ||
-    location.pathname === "/about" ||
+    location.pathname === "/guestbook" ||
     location.pathname === "/create-listing"
   ) {
     headerColor = "bg-slate-200";
@@ -95,11 +95,11 @@ export default function Header() {
                 Home
               </li>
             </Link>
-            <Link to="/about">
+            <Link to="/guestbook">
               <li
                 className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
               >
-                About
+                Guestbook
               </li>
             </Link>
             <Link to="/sign-up-in">
@@ -123,30 +123,48 @@ export default function Header() {
 
           <div onClick={toggleMenu} className="md:hidden cursor-pointer">
             {isSwitchOn ? (
-              <IoClose className="text-slate-700 w-16 h-6" />
+              <IoClose className={`${headerTextColor} w-16 h-6`} />
             ) : (
-              <IoMenu className="text-slate-700 w-16 h-6" />
+              <IoMenu
+                className={` ${headerTextColor} text-slate-700 w-16 h-6`}
+              />
             )}
           </div>
 
           {isSwitchOn && (
-            <div className="absolute lg:hidden z-50 flex w-1/2 text-center justify-center top-[90%] right-0 bg-slate-300 py-10 px-8 rounded-md">
-              <ul className=" flex flex-col gap-4">
-                <Link to="/">
-                  <li className="sm:inline text-slate-700 hover:underline">
-                    HOME
+            <div
+              className={`absolute lg:hidden z-50 flex w-1/2 h-[100vh] text-center justify-center top-[100%] right-0  py-20 px-8 ${headerColor}`}
+            >
+              <ul className=" flex pt-[70%] flex-col gap-4">
+                <Link to="/" onClick={toggleMenu}>
+                  <li
+                    className={`sm:inline hover:underline ${headerTextColor}`}
+                  >
+                    Home
                   </li>
                 </Link>
-                <Link to="/about">
-                  <li className="sm:inline text-slate-700 hover:underline">
-                    ABOUT
+                <Link to="/guestbook" onClick={toggleMenu}>
+                  <li
+                    className={`sm:inline hover:underline ${headerTextColor}`}
+                  >
+                    Guestbook
                   </li>
                 </Link>
-                <Link to="/sign-up-in">
+                <Link to="/sign-up-in" onClick={toggleMenu}>
                   {currentUser ? (
-                    <li className=" text-slate-700 hover:underline"> Logout</li>
+                    <li
+                      className={`sm:inline hover:underline ${headerTextColor}`}
+                    >
+                      {" "}
+                      Logout
+                    </li>
                   ) : (
-                    <li className=" text-slate-700 hover:underline"> SIGNIN</li>
+                    <li
+                      className={`sm:inline hover:underline ${headerTextColor}`}
+                    >
+                      {" "}
+                      SIGNIN
+                    </li>
                   )}
                 </Link>
               </ul>
