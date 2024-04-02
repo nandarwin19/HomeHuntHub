@@ -126,9 +126,9 @@ export default function Search() {
   };
 
   return (
-    <div className="flex bg-black1 text-white flex-col md:flex-row">
-      <div className="p-7  border-b-2 md:border-r-2 border-gray-500 md:min-h-screen">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+    <div className="flex bg-slate-200 text-black1 flex-col md:flex-row">
+      <div className="p-7 w-full md:w-[350px]  border-b-2 md:border-r-[1.5px] border-gray-400 md:min-h-screen">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">
               Search Term:
@@ -228,7 +228,7 @@ export default function Search() {
         </form>
       </div>
       <div className="">
-        <h1 className="text-3xl font-semibold underline p-3 text-white mt-5">
+        <h1 className="text-3xl font-semibold underline p-3 mt-5">
           Listing results:
         </h1>
         <div className="p-7 flex flex-wrap justify-between gap-4">
@@ -238,10 +238,10 @@ export default function Search() {
             </h1>
           )}
           {loading && (
-            <div className="flex w-full mt-44 mx-auto items-center justify-center">
-              <div className="w-4 h-4 mx-auto">
+            <div className="w-[80vw] min-h-screen flex items-center justify-center">
+              <div className="w-10 h-10">
                 <div className="animate-spin">
-                  <FaCircleNotch />
+                  <FaCircleNotch className="w-10 h-10" />
                 </div>
               </div>
             </div>

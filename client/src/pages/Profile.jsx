@@ -34,7 +34,7 @@ export default function Profile() {
 
   const dispatch = useDispatch();
 
-  console.log(formData);
+  // console.log(formData);
 
   // firebase storage
   // allow read;
@@ -145,6 +145,7 @@ export default function Profile() {
         return;
       }
       setUserListings(data);
+      console.log(userListings);
     } catch (error) {
       setShowListingsError(true);
     }
@@ -276,9 +277,9 @@ export default function Profile() {
             {showListingsError ? "Error showing listings" : null}
           </p>
         </div>
-        <div className="py-8">
+        <div className="py-8 max-w-sm mx-auto">
           {userListings && userListings.length > 0 && (
-            <div className="flex flex-col text-black1 gap-4">
+            <div className="flex flex-col  text-black1 gap-4">
               <h1 className="text-center mt-7 text-2xl font-semibold">
                 Your Listings
               </h1>

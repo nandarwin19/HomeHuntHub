@@ -8,12 +8,14 @@ import {
   FaBath,
   FaBed,
   FaChair,
+  FaCircleNotch,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import Contact from "../components/Contact";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -21,12 +23,12 @@ export default function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [copied, setCopied] = useState(false);
+
   const { currentUser } = useSelector((state) => state.user);
   const [contact, setContact] = useState(false);
   const params = useParams();
 
-  console.log(currentUser._id, listing?.userRef);
+  // console.log(currentUser._id, listing?.userRef);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -50,8 +52,17 @@ export default function Listing() {
   }, [params.listingId]);
 
   return (
-    <main className="bg-black/95 text-white">
-      {loading && <p>Loading...</p>}
+    <main className="bg-black/95 min-h-screen text-white">
+      <Toaster />
+      {loading && (
+        <div className="w-full min-h-screen flex items-center justify-center">
+          <div className="w-10 h-10">
+            <div className="animate-spin">
+              <FaCircleNotch className="w-10 h-10" />
+            </div>
+          </div>
+        </div>
+      )}
       {error && <p>Something went wrong</p>}
       {listing && !loading && !error && (
         <>
@@ -73,18 +84,11 @@ export default function Listing() {
               className="text-slate-500"
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
-                setCopied(true);
-                setTimeout(() => {
-                  setCopied(false);
-                }, 2000);
+                toast.success("Link copied!");
               }}
             />
           </div>
-          {copied && (
-            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
-              Link copied!
-            </p>
-          )}
+
           <div className="flex flex-col max-w-4xl mx-auto p-3 py-10 gap-4">
             <p className="Aquatico text-2xl font-semibold">
               {listing.name} - ${" "}

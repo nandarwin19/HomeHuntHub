@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import toast from "react-hot-toast";
 
 export default function ContactHome() {
   const form = useRef();
@@ -16,6 +17,7 @@ export default function ContactHome() {
       .then(
         (result) => {
           console.log(result.text);
+          toast.success("Email has sent!");
         },
         (error) => {
           console.log(error.text);
@@ -23,8 +25,8 @@ export default function ContactHome() {
       );
   };
   return (
-    <>
-      {" "}
+    <div>
+      
       <h1 className="text-2xl md:text-3xl uppercase text-center">Contact</h1>
       <p className="text-lg md:text-xl uppercase my-6">Send us a message</p>
       <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-6">
@@ -38,7 +40,7 @@ export default function ContactHome() {
         <input
           type="email"
           name="user_email"
-          className="border-b border-white/70 outline-none bg-transparent"
+          className="border-b border-white/70 bg-transparent outline-none bg-transparent"
         />
         <label>Message</label>
         <textarea
@@ -53,6 +55,6 @@ export default function ContactHome() {
           value="Send"
         />
       </form>
-    </>
+    </div>
   );
 }

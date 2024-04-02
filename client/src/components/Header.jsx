@@ -38,7 +38,9 @@ export default function Header() {
     location.pathname === "/profile" ||
     location.pathname === "/sign-up-in" ||
     location.pathname === "/guestbook" ||
-    location.pathname === "/create-listing"
+    location.pathname === "/create-listing" ||
+    location.pathname.startsWith("/update-listing/") ||
+    location.pathname === "/search"
   ) {
     headerColor = "bg-slate-200";
     headerTextColor = "text-black";
@@ -90,14 +92,14 @@ export default function Header() {
           <ul className="hidden md:flex items-center justify-center gap-8">
             <Link to="/">
               <li
-                className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
+                className={`hidden sm:inline  hover:text-gray-400 font-semibold ${headerTextColor}`}
               >
                 Home
               </li>
             </Link>
             <Link to="/guestbook">
               <li
-                className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
+                className={`hidden sm:inline  hover:text-gray-400 font-semibold ${headerTextColor}`}
               >
                 Guestbook
               </li>
@@ -143,6 +145,14 @@ export default function Header() {
                     Home
                   </li>
                 </Link>
+                <Link
+                  to="/search"
+                  onClick={toggleMenu}
+                  className={`sm:inline hover:underline ${headerTextColor}`}
+                >
+                  Houses
+                </Link>
+
                 <Link to="/guestbook" onClick={toggleMenu}>
                   <li
                     className={`sm:inline hover:underline ${headerTextColor}`}
@@ -150,20 +160,20 @@ export default function Header() {
                     Guestbook
                   </li>
                 </Link>
+
                 <Link to="/sign-up-in" onClick={toggleMenu}>
                   {currentUser ? (
-                    <li
+                    <Link
                       className={`sm:inline hover:underline ${headerTextColor}`}
+                      to="/profile"
                     >
-                      {" "}
-                      Logout
-                    </li>
+                      Profile
+                    </Link>
                   ) : (
                     <li
                       className={`sm:inline hover:underline ${headerTextColor}`}
                     >
-                      {" "}
-                      SIGNIN
+                      Sign in
                     </li>
                   )}
                 </Link>

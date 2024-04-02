@@ -55,6 +55,8 @@ export default function About() {
       });
       const data = await res.json();
       setLoading(false);
+      formData.message = "";
+      toast.success("Comment added!");
       if (data.success === false) {
         console.log(data.message);
       }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
@@ -50,3 +51,14 @@ export default function Contact({ listing }) {
     </>
   );
 }
+Contact.propTypes = {
+  listing: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    userRef: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  landlord: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+};

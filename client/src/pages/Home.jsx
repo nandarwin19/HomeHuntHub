@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,17 +8,21 @@ import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
 import { FaGithub, FaTelegramPlane } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-
+import { useLocation } from "react-router-dom";
 import ContactHome from "../components/ContactHome";
+import { Toaster } from "react-hot-toast";
 
 function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-  console.log(saleListings);
-  console.log(offerListings);
+  const location = useLocation();
 
   const lenisRef = useRef();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -174,29 +178,30 @@ function Home() {
         ease: "none",
       });
 
-      gsap.to(".listings__list1", {
+      gsap.to(".listings1", {
         scrollTrigger: {
           trigger: ".listings1",
           start: "top top",
           end: "bottom top",
           scrub: true,
+          // markers: true,
         },
-        scale: 1.1,
+        scale: 1.3,
         ease: "none",
       });
 
-      gsap.to(".listings__list2", {
+      gsap.to(".listings2", {
         scrollTrigger: {
           trigger: ".listings2",
           start: "top top",
           end: "bottom top",
           scrub: true,
         },
-        scale: 1.2,
+        scale: 1.3,
         ease: "none",
       });
 
-      gsap.to(".listings__list3", {
+      gsap.to(".listings3", {
         scrollTrigger: {
           trigger: ".listings3",
           start: "top top",
@@ -235,6 +240,7 @@ function Home() {
 
   return (
     <div className="wrapp">
+      <Toaster />
       <header className="header  gsap__anim">
         <div className="parallax__wrapp">
           <div className="header__bg">
@@ -273,7 +279,7 @@ function Home() {
                   <li className="serv__item">
                     Creative direction
                     <span className="serv__item-img">
-                      <img src="img/s1.png" alt="" />
+                      <img src="img/1.jpg" alt="" />
                     </span>
                   </li>
                   <li className="serv__item">
@@ -446,7 +452,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center mt-4">
+            <div className="flex items-center justify-center my-4">
               <p className="text-center flex text-sm text-gray-600 font-semibold">
                 Created by&nbsp;
                 <span className="text-[#acabab] hover:underline font-bold">

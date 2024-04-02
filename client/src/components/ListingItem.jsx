@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
+import PropTypes from "prop-types";
 
 export default function ListingItem({ listing }) {
   return (
-    <div className="item-card my-2 bg-white text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full md:w-[330px] ">
+    <div className="item-card my-2 bg-[#f1efef] text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full md:w-[330px] ">
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -48,3 +49,19 @@ export default function ListingItem({ listing }) {
     </div>
   );
 }
+
+ListingItem.propTypes = {
+  listing: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+    offer: PropTypes.bool.isRequired,
+    discountPrice: PropTypes.number.isRequired,
+    regularPrice: PropTypes.number.isRequired,
+    type: PropTypes.oneOf(["rent", "sale"]).isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    bathrooms: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
+};
