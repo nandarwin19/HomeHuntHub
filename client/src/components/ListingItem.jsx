@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function ListingItem({ listing }) {
   return (
-    <div className="item-card my-2 bg-[#f1efef] text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full md:w-[330px] ">
+    <div className="item-card my-2 bg-[#f1efef] text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden h-[450px] md:h-full rounded-lg w-full md:w-[330px] ">
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
