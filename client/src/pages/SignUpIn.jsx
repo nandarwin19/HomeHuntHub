@@ -51,8 +51,12 @@ export default function SignUp() {
       // setLoading(false);
       // setError(null);
       dispatch(signInSuccess(data));
+      setToggleChange(true);
       console.log(data);
-      navigate("/");
+      // navigate("/");
+      if (toggleChange) {
+        navigate("/");
+      }
     } catch (error) {
       // setLoading(false);
       dispatch(signInFailure(error.message));
