@@ -13,6 +13,10 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const toggleMenu = () => {
     setSwitch(!isSwitchOn);
   };
