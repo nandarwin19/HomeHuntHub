@@ -113,7 +113,7 @@ export default function Header() {
                 </Link>
               ) : (
                 <li
-                  className={`hidden sm:inline  hover:text-white font-semibold ${headerTextColor}`}
+                  className={`hidden sm:inline  hover:text-gray-600 font-semibold ${headerTextColor}`}
                 >
                   Sign in
                 </li>
