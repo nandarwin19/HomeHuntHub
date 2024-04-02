@@ -8,3 +8,12 @@ export const guestbook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getGuestbooks = async (req, res, next) => {
+  try {
+    const guestbooks = await Guestbook.find({}).sort({ createdAt: -1 });
+    return res.status(200).json(guestbooks);
+  } catch (error) {
+    next(error);
+  }
+};
