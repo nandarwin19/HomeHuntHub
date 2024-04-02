@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function ListingItem({ listing }) {
   return (
-    <div className="item-card my-2 bg-[#f1efef] text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden h-[450px] md:h-full rounded-lg w-full md:w-[330px] ">
+    <div className="item-card my-2 bg-[#f1efef] text-black  shadow-md hover:shadow-lg transition-shadow overflow-hidden h-full md:h-full rounded-lg w-full md:w-[330px] ">
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -12,7 +12,7 @@ export default function ListingItem({ listing }) {
             "https://www.realsimple.com/thmb/FUOyuPhMiyR-FskQKOf6Hsy2W_8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/winterize-house-GettyImages-1290088938-974f04d25e654a7482c13eb96f478247.jpg"
           }
           alt="listing cover"
-          className="h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300"
+          className="h-[300px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300"
         />
         <div className="p-3 flex flex-col gap-2 pb-5 w-full">
           <div className="flex items-center justify-between">

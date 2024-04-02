@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "https://i.imgur.com/6VBx3io.png",
+      default:
+        "https://static.vecteezy.com/system/resources/previews/007/319/933/original/black-avatar-person-icons-user-profile-icon-vector.jpg",
     },
   },
   { timestamps: true }
