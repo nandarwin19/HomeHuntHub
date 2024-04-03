@@ -19,21 +19,14 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return next(errorHandler(404, "User not found")); //if user not found
-    }
-    const validPw = bcryptjs.compareSync(password, user.password); //compare the password
-    if (!validPw)
-      //if password is not valid
-      return next(errorHandler(401, "Password is not valid")); //401 is for unauthorized
-    const token = jwt.sign({ id: user._id }, process.env.jwt_SECRET);
-    const { password: pw, ...rest } = user._doc; //to not send the password to the client
+    const validUser = await User.findOne({ email });
+    if (!validUser) return next(errorHandler(404, "User not found!"));
+    const validPassword = bcryptjs.compareSync(password, validUser.password);
+    if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
+    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+    const { password: pass, ...rest } = validUser._doc;
     res
-      .cookie("token", token, {
-        httpOnly: true, //to prevent cross site scripting
-        // expires: new Date(Date.now() + 24 * 60 * 60 * 1000), //to set the expiration date
-      })
+      .cookie("access_token", token, { httpOnly: true })
       .status(200)
       .json(rest);
   } catch (error) {
