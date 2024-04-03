@@ -40,7 +40,8 @@ export default function Header() {
   let headerColor = "bg-primary";
   if (
     location.pathname === "/profile" ||
-    location.pathname === "/sign-up-in" ||
+    location.pathname === "/sign-up" ||
+    location.pathname === "/sign-in" ||
     location.pathname === "/guestbook" ||
     location.pathname === "/create-listing" ||
     location.pathname.startsWith("/update-listing/") ||
@@ -108,7 +109,7 @@ export default function Header() {
                 Guestbook
               </li>
             </Link>
-            <Link to="/sign-up-in">
+            <Link to="/sign-up">
               {currentUser ? (
                 <Link to="/profile">
                   <img
@@ -165,7 +166,7 @@ export default function Header() {
                   </li>
                 </Link>
 
-                <Link to="/sign-up-in" onClick={toggleMenu}>
+                <Link to="/sign-up" onClick={toggleMenu}>
                   {currentUser ? (
                     <Link
                       className={`sm:inline hover:underline ${headerTextColor}`}

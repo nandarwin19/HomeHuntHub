@@ -73,7 +73,7 @@ export default function About() {
         <div className="border-b border-gray-400">
           <h1 className="text-4xl font-bold text-start">Guestbook</h1>
           <p className=" my-2 mb-6 text-start text-gray-600 text-md">
-            Welcome to the review page. You can tell anything here!
+            Welcome to the guestbook page. Test!
           </p>
         </div>
         <div className="max-w-lg mx-auto">
