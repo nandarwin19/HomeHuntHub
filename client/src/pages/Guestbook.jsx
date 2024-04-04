@@ -98,7 +98,7 @@ export default function About() {
 
                   <button
                     disabled={loading}
-                    className="bg-black1 text-white w-24 rounded-md py-2 px-2"
+                    className="bg-black1 flex gap-2 items-center justify-center text-white w-24 rounded-md py-2 px-2"
                   >
                     Submit
                     {loading && (

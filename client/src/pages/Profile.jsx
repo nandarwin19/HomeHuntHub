@@ -241,7 +241,7 @@ export default function Profile() {
 
             <button
               disabled={loading}
-              className="w-full cursor-pointer flex items-center justify-center  py-2 relative text-white bg-black1 font-medium rounded-lg"
+              className="w-full gap-2 cursor-pointer flex items-center justify-center  py-2 relative text-white bg-black1 font-medium rounded-lg"
             >
               Update
               {loading && (
