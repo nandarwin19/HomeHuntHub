@@ -83,7 +83,7 @@ export default function About() {
                 <img
                   src={currentUser.avatar}
                   alt=""
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 object-cover rounded-full"
                 />
                 <div className="w-full flex flex-col items-end space-y-2">
                   <textarea
