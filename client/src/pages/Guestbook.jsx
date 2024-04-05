@@ -93,7 +93,7 @@ export default function About() {
                     value={formData.message}
                     onChange={handleChange}
                     className="p-2.5 w-full text-sm text-gray-900 rounded-lg border-[3px] border-gray-100 focus:border-gray-100  bg-black1/90 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-gray-100"
-                    placeholder="Write your thoughts here..."
+                    placeholder="Write here..."
                   ></textarea>
 
                   <button
@@ -114,7 +114,7 @@ export default function About() {
             ) : (
               <div className="flex items-center gap-1 font-semibold">
                 <Link
-                  to={`/sign-up-in`}
+                  to={`/sign-up`}
                   className="bg-black1 text-white rounded-md py-2 px-4"
                 >
                   Login
