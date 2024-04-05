@@ -467,19 +467,6 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center mt-8 md:my-4">
-              <p className="text-center flex text-sm text-gray-600 font-semibold">
-                Created by&nbsp;
-                <span className="text-[#acabab] hover:underline font-bold">
-                  <a
-                    href="https://github.com/nandarwin19"
-                    className="flex items-center space-x-2"
-                  >
-                    nwin
-                  </a>
-                </span>
-              </p>
-            </div>
           </div>
         </section>
       </main>
