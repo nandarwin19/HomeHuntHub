@@ -29,7 +29,7 @@ export default function ContactHome() {
       <h1 className="text-2xl md:text-3xl uppercase mb-10 text-center Aquatico">
         Contact
       </h1>
-      <p className="text-lg md:text-xl uppercase my-6">Send us a message</p>
+      <p className="text-lg  my-6">Send us a message</p>
       <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-6">
         <label>Name*</label>
         <input

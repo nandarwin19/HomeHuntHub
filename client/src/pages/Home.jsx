@@ -263,7 +263,10 @@ function Home() {
             <img src="img/1.jpg" alt="" />
           </div>
           <div className="content title title-p">
-            <p className="text-2xl text-[#fff] ">Welcome to our website</p>
+            <p className="text-xl normal-case md:text-2xl text-[#fff]">
+              Welcome to our website
+            </p>
+
             <h1 className="text-[80px] tablet:text-[90px]">
               WE ARE THE BEST<span className="stroke"> Home </span> SHOP
             </h1>
