@@ -168,75 +168,74 @@ function Home() {
         xPercent: -10,
         ease: "none",
       });
-      if (window.matchMedia("(min-width: 768px)").matches) {
-        gsap.to(".serv .stroke", {
-          scrollTrigger: {
-            trigger: ".serv",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          xPercent: 100,
-          ease: "none",
-        });
+      // if (window.matchMedia("(min-width: 768px)").matches) {
+      gsap.to(".serv .stroke", {
+        scrollTrigger: {
+          trigger: ".serv",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        xPercent: 100,
+        ease: "none",
+      });
 
-        gsap.to(".serv__item:nth-child(1)", {
-          scrollTrigger: {
-            trigger: ".serv",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          xPercent: -10,
-          ease: "none",
-        });
+      gsap.to(".serv__item:nth-child(1)", {
+        scrollTrigger: {
+          trigger: ".serv",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        xPercent: -10,
+        ease: "none",
+      });
 
-        gsap.to(".serv__item:nth-child(3)", {
-          scrollTrigger: {
-            trigger: ".serv",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          xPercent: 10,
-          ease: "none",
-        });
+      gsap.to(".serv__item:nth-child(3)", {
+        scrollTrigger: {
+          trigger: ".serv",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        xPercent: 10,
+        ease: "none",
+      });
 
-        // Apply animations for larger devices
-        gsap.to(".listings1", {
-          scrollTrigger: {
-            trigger: ".listings1",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-            // markers: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
+      // Apply animations for larger devices
+      gsap.to(".listings1", {
+        scrollTrigger: {
+          trigger: ".listings1",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          // markers: true,
+        },
+        scale: 1.3,
+        ease: "none",
+      });
 
-        gsap.to(".listings2", {
-          scrollTrigger: {
-            trigger: ".listings2",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
+      gsap.to(".listings2", {
+        scrollTrigger: {
+          trigger: ".listings2",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        scale: 1.3,
+        ease: "none",
+      });
 
-        gsap.to(".listings3", {
-          scrollTrigger: {
-            trigger: ".listings3",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
-      }
+      gsap.to(".listings3", {
+        scrollTrigger: {
+          trigger: ".listings3",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        scale: 1.3,
+        ease: "none",
+      });
 
       gsap.to(".approve__star", {
         scrollTrigger: {
@@ -255,7 +254,9 @@ function Home() {
     const debouncedResize = _.debounce(onWindowResize, 500);
     function onWindowResize() {
       console.log("Window resized!");
-      window.location.reload();
+      if (window.innerWidth >= 768) {
+        window.location.reload();
+      }
     }
     window.addEventListener("resize", debouncedResize);
 
