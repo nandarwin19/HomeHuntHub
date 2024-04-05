@@ -203,40 +203,41 @@ function Home() {
       });
 
       // Apply animations for larger devices
-      gsap.to(".listings1", {
-        scrollTrigger: {
-          trigger: ".listings1",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-        },
-        scale: 1.3,
-        ease: "none",
-      });
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        gsap.to(".listings1", {
+          scrollTrigger: {
+            trigger: ".listings1",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+          scale: 1.3,
+          ease: "none",
+        });
 
-      gsap.to(".listings2", {
-        scrollTrigger: {
-          trigger: ".listings2",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        scale: 1.3,
-        ease: "none",
-      });
+        gsap.to(".listings2", {
+          scrollTrigger: {
+            trigger: ".listings2",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+          scale: 1.3,
+          ease: "none",
+        });
 
-      gsap.to(".listings3", {
-        scrollTrigger: {
-          trigger: ".listings3",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        scale: 1.3,
-        ease: "none",
-      });
-
+        gsap.to(".listings3", {
+          scrollTrigger: {
+            trigger: ".listings3",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+          scale: 1.3,
+          ease: "none",
+        });
+      }
       gsap.to(".approve__star", {
         scrollTrigger: {
           trigger: ".approve",
