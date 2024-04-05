@@ -420,7 +420,7 @@ function Home() {
           </div>
         </section>
 
-        <section className="header gsap__anim bg-white">
+        <section className="section gsap__anim h-full">
           <div className="parallax__wrapp text-white">
             <div className="flex flex-col md:flex-row justify-between gap-20 max-container">
               <div className="w-full md:w-4/5">
