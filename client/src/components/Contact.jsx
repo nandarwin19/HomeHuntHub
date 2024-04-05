@@ -38,11 +38,11 @@ export default function Contact({ listing }) {
             value={message}
             onChange={onChange}
             placeholder="Enter your message here..."
-            className="w-full border outline-none p-3 rounded-lg text-black"
+            className="w-full border border-gray-700 bg-black/80 outline-none p-3 rounded-lg text-white"
           />
           <Link
             to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
-            className="bg-pink1 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+            className="bg-red-600 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
           >
             Send message
           </Link>

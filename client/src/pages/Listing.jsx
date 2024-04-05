@@ -28,8 +28,6 @@ export default function Listing() {
   const [contact, setContact] = useState(false);
   const params = useParams();
 
-  // console.log(currentUser._id, listing?.userRef);
-
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -137,7 +135,7 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
-            {currentUser && listing.userRef === currentUser._id && !contact && (
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
                 className="bg-white/90 p-2 my-2 text-black rounded-lg uppercase hover:opacity-95"
