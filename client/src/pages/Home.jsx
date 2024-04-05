@@ -17,7 +17,7 @@ function Home() {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   const location = useLocation();
-
+  const isLargeDevice = window.matchMedia("(min-width: 768px)").matches;
   const lenisRef = useRef();
 
   useEffect(() => {
@@ -84,185 +84,172 @@ function Home() {
     fetchOfferListings();
   }, []);
 
-  useEffect(() => {
-    lenisRef.current = new Lenis({
-      duration: 1.2,
-      infinite: false,
-    });
+  function scrollTrig() {
+    gsap.registerPlugin(ScrollTrigger);
 
-    function raf(time) {
-      lenisRef.current.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    lenisRef.current.on("scroll", ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-      lenisRef.current.raf(time * 1000);
-    });
-
-    // Create animation
-    function scrollTrig() {
-      gsap.registerPlugin(ScrollTrigger);
-
-      let gsapAnim = gsap.utils.toArray(".gsap__anim");
-
-      gsapAnim.forEach((section) => {
-        gsap.to(section, {
-          scrollTrigger: {
-            trigger: section,
-            start: "bottom bottom",
-            end: "bottom top",
-            scrub: true,
-            snap: true,
-          },
-          yPercent: 100,
-          ease: "none",
-        });
-      });
-
-      let parallaxWrapp = gsap.utils.toArray(".parallax__wrapp");
-      parallaxWrapp.forEach((parallax) => {
-        gsap.to(parallax, {
-          scrollTrigger: {
-            trigger: parallax,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          yPercent: -20,
-          ease: "none",
-        });
-      });
-
-      gsap.to(".title-p", {
+    let gsapAnim = gsap.utils.toArray(".gsap__anim");
+    gsapAnim.forEach((section) => {
+      gsap.to(section, {
         scrollTrigger: {
-          trigger: "header.header",
-          start: "top top",
+          trigger: section,
+          start: "bottom bottom",
           end: "bottom top",
           scrub: true,
+          snap: true,
         },
         yPercent: 100,
-      });
-
-      gsap.to(".title__img img", {
-        scrollTrigger: {
-          trigger: ".serv",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-        rotate: 360,
         ease: "none",
       });
+    });
 
-      gsap.to(".title__t", {
+    let parallaxWrapp = gsap.utils.toArray(".parallax__wrapp");
+    parallaxWrapp.forEach((parallax) => {
+      gsap.to(parallax, {
         scrollTrigger: {
-          trigger: ".serv",
+          trigger: parallax,
           start: "top top",
           end: "bottom top",
           scrub: true,
         },
-        xPercent: -10,
+        yPercent: -20,
         ease: "none",
       });
-      // if (window.matchMedia("(min-width: 768px)").matches) {
-      gsap.to(".serv .stroke", {
-        scrollTrigger: {
-          trigger: ".serv",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        xPercent: 100,
-        ease: "none",
+    });
+
+    gsap.to(".title-p", {
+      scrollTrigger: {
+        trigger: "header.header",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      yPercent: 100,
+    });
+
+    gsap.to(".title__img img", {
+      scrollTrigger: {
+        trigger: ".serv",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+      rotate: 360,
+      ease: "none",
+    });
+
+    gsap.to(".title__t", {
+      scrollTrigger: {
+        trigger: ".serv",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      xPercent: -10,
+      ease: "none",
+    });
+
+    gsap.to(".serv .stroke", {
+      scrollTrigger: {
+        trigger: ".serv",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      xPercent: 100,
+      ease: "none",
+    });
+
+    gsap.to(".serv__item:nth-child(1)", {
+      scrollTrigger: {
+        trigger: ".serv",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      xPercent: -10,
+      ease: "none",
+    });
+
+    gsap.to(".serv__item:nth-child(3)", {
+      scrollTrigger: {
+        trigger: ".serv",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      xPercent: 10,
+      ease: "none",
+    });
+
+    // Apply animations for larger devices
+    gsap.to(".listings1", {
+      scrollTrigger: {
+        trigger: ".listings1",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      scale: 1.3,
+      ease: "none",
+    });
+
+    gsap.to(".listings2", {
+      scrollTrigger: {
+        trigger: ".listings2",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      scale: 1.3,
+      ease: "none",
+    });
+
+    gsap.to(".listings3", {
+      scrollTrigger: {
+        trigger: ".listings3",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      scale: 1.3,
+      ease: "none",
+    });
+
+    gsap.to(".approve__star", {
+      scrollTrigger: {
+        trigger: ".approve",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+      rotate: 360,
+      ease: "none",
+    });
+  }
+  function raf(time) {
+    lenisRef.current.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  useEffect(() => {
+    if (isLargeDevice) {
+      lenisRef.current = new Lenis({ duration: 1.2, infinite: false });
+
+      requestAnimationFrame(raf);
+      lenisRef.current.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenisRef.current.raf(time * 1000);
       });
 
-      gsap.to(".serv__item:nth-child(1)", {
-        scrollTrigger: {
-          trigger: ".serv",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        xPercent: -10,
-        ease: "none",
-      });
-
-      gsap.to(".serv__item:nth-child(3)", {
-        scrollTrigger: {
-          trigger: ".serv",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        xPercent: 10,
-        ease: "none",
-      });
-
-      // Apply animations for larger devices
-      if (window.matchMedia("(min-width: 768px)").matches) {
-        gsap.to(".listings1", {
-          scrollTrigger: {
-            trigger: ".listings1",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-            // markers: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
-
-        gsap.to(".listings2", {
-          scrollTrigger: {
-            trigger: ".listings2",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
-
-        gsap.to(".listings3", {
-          scrollTrigger: {
-            trigger: ".listings3",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-          scale: 1.3,
-          ease: "none",
-        });
-      }
-      gsap.to(".approve__star", {
-        scrollTrigger: {
-          trigger: ".approve",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-        rotate: 360,
-        ease: "none",
-      });
+      // Call the scrollTrig function
+      scrollTrig();
     }
-    scrollTrig();
 
-    // resize window
-    const debouncedResize = _.debounce(onWindowResize, 500);
-    function onWindowResize() {
-      console.log("Window resized!");
-      if (window.innerWidth >= 768) {
-        window.location.reload();
-      }
-    }
-    window.addEventListener("resize", debouncedResize);
-
+    // Clean up function
     return () => {
-      window.removeEventListener("resize", debouncedResize);
+      if (isLargeDevice && lenisRef.current) {
+        lenisRef.current.destroy();
+      }
     };
   }, []);
 
@@ -480,7 +467,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center my-4">
+            <div className="flex items-center justify-center mt-8 md:my-4">
               <p className="text-center flex text-sm text-gray-600 font-semibold">
                 Created by&nbsp;
                 <span className="text-[#acabab] hover:underline font-bold">
