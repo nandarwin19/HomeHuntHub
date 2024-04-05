@@ -405,7 +405,7 @@ function Home() {
           </div>
         </section>
 
-        <section className="section gsap__anim approve">
+        <section className="section section-quantity gsap__anim approve">
           <div className="parallax__wrapp">
             <div className="content">
               <div className="approve__wrapp">

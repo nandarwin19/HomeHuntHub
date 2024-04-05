@@ -62,8 +62,13 @@
   @apply inline-block translate-x-[-45px] tablet:translate-x-[-105px];
 }
 .section {
-  @apply h-full md:h-screen;
+  @apply h-screen;
 }
+
+.section-quantity {
+  @apply h-auto md:h-screen;
+}
+
 .section .parallax__wrapp {
   @apply px-0 py-[50px];
 }
