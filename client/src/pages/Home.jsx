@@ -444,7 +444,7 @@ function Home() {
                   <ul className="flex space-x-4 mt-4">
                     <li>
                       <a
-                        href="https://t.me/nwin2004"
+                        href="https://t.me"
                         className="flex items-center space-x-2"
                       >
                         <FaTelegramPlane />
@@ -452,17 +452,14 @@ function Home() {
                     </li>
                     <li>
                       <a
-                        href="https://github.com/nandarwin19"
+                        href="https://github.com"
                         className="flex items-center space-x-2"
                       >
                         <FaGithub />
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="mailto:nwin21210@gmail.com"
-                        className="flex items-center space-x-2"
-                      >
+                      <a href="" className="flex items-center space-x-2">
                         <MdEmail />
                       </a>
                     </li>
