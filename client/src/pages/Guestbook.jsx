@@ -13,14 +13,13 @@ export default function About() {
     message: "",
     avatar: currentUser ? currentUser.avatar : "",
   });
-  console.log(messages);
 
   useEffect(() => {
     const getMessages = async () => {
       try {
         const res = await fetch("/api/guestbook");
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         if (Array.isArray(data)) {
           setMessages(data);
         } else {
@@ -33,7 +32,7 @@ export default function About() {
     getMessages();
   }, [messages]);
 
-  console.log(formData);
+  // console.log(formData);
 
   const handleChange = (e) => {
     setFormData({ ...formData, message: e.target.value });
