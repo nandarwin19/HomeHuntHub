@@ -271,7 +271,7 @@ function Home() {
               WE ARE THE BEST<span className="stroke"> Home </span> SHOP
             </h1>
             <button className="hidden tablet:flex text-white p-3 my-8 text-xl bg-[#eb0945]">
-              {`Let's explore`}
+              <Link to="/search">Find your home</Link>
             </button>
           </div>
         </div>

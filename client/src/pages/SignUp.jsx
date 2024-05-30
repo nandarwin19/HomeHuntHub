@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import OAuth from "../components/OAuth";
 import { FaCircleNotch } from "react-icons/fa";
 
 export default function SignUp() {
@@ -43,7 +42,7 @@ export default function SignUp() {
   return (
     <div className="h-[90vh] w-full flex items-center justify-center bg-slate-200  font-poppins">
       <div className="w-11/12 mx-auto pt-10">
-        <div className="w-full max-w-sm mx-auto bg-slate-200 backdrop-blur-md rounded-lg p-8 border-2 border-gray-300/60 shadow-2xl shadow-gray-500/60">
+        <div className="w-full max-w-sm mx-auto bg-slate-200 py-20 backdrop-blur-md rounded-lg p-8 border-2 border-gray-300/60 shadow-2xl shadow-gray-500/60">
           <h1 className="text-2xl mb-5 text-center font-bold">Sign Up</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
@@ -81,7 +80,6 @@ export default function SignUp() {
                 </div>
               )}
             </button>
-            <OAuth />
           </form>
           <div className="flex text-sm gap-2 mt-5">
             <p>Have an account?</p>
