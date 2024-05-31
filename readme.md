@@ -43,3 +43,9 @@ This website provides an efficient and seamless experience for both buyers and s
 3. Create, manage, update, and delete your own listings.
 4. Click on a house listing to send a message inquiring about renting.
 5. Leave texts in the guestbook.
+
+## Preview
+
+**Home page and search page:**
+![HomeHub](/client/public/readme1.png)
+![HomeHub](/client/public/readme2.png)
